@@ -32,18 +32,13 @@ The CSV is around 470 MB, so it is read in chunks with pandas. It is not include
 
 Results on the validation set (default threshold of 0.5):
 
-| Model | Precision | Recall | F1 | ROC-AUC | PR-AUC |
-|---|---:|---:|---:|---:|---:|
-| Logistic Regression | 0.45 | 0.98 | 0.62 | 0.9933 | 0.9080 |
-| Decision Tree | 0.88 | 0.98 | 0.93 | 0.9884 | 0.9580 |
-| Random Forest | 0.83 | 0.98 | 0.90 | 0.9986 | 0.9889 |
-| Gradient Boosting | 0.97 | 0.89 | 0.93 | 0.9979 | 0.9822 |
-| XGBoost | 0.98 | 0.97 | 0.97 | 0.9994 | 0.9961 |
-| Tuned XGBoost | 0.98 | 0.96 | 0.97 | 0.9994 | 0.9959 |
-
 ![Model Performance Comparison](images/model_comparison.png)
 
-XGBoost performed best, so it was used for the rest of the project.
+XGBoost was chosen for the rest of the project because:
+
+- It had the **highest PR-AUC (0.9961)**, which is the most important metric here since fraud is so rare.
+- It had the **best balance between precision and recall** (0.98 and 0.97). Logistic Regression and Random Forest had high recall but raised many more false alarms (precision 0.45 and 0.83), while Gradient Boosting had high precision but missed more fraud (recall 0.89).
+- It also had the highest ROC-AUC (0.9994), so it separates fraud from normal transactions the best across all thresholds.
 
 ## Hyperparameter Tuning
 
